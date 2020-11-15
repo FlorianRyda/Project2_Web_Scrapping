@@ -3,18 +3,17 @@ import requests
 import csv
 
 
-url = "http://books.toscrape.com/catalogue/tipping-the-velvet_999/index.html"
-#pull the code from the website and parse it
 def get_content(url):
+	"""gets html information from werbsite and returns parsed object"""
 	response = requests.get(url)
 	if response.status_code != 200:
 		raise Exception("couldn't pull information!/ URL not valid")
 	return BeautifulSoup(response.content, features='html.parser')
 
 
-def get_book_rating(content):
-	"""gets the rating from class name"""
-	book_info_rating = str((get_content(url).body))
+def get_book_rating(url):
+	"""gets and returns the rating from selected book"""
+	book_info_rating = str((get_content(url)))
 	if "star-rating Four" in book_info_rating:
 		return ("Four Stars")
 	elif "star-rating Three" in book_info_rating:
@@ -26,13 +25,13 @@ def get_book_rating(content):
 	else:
 		return ("No Rating Available")
 
-
-def get_book_info(content):
+def get_book_info(url):
     """
     convert pulled elements to strings of text
     associate each value to a key in a dictionnary and append it in the empty list
     """
     parsed_content = get_content(url)
+    book_info_rating = get_book_rating(url)
 
     book_info_title = parsed_content.select('h1')[0].text.strip()
     book_info_category = parsed_content.select('ul li a')[2].text.strip()
@@ -53,18 +52,7 @@ def get_book_info(content):
         "Price Excluding Tax" : book_price_excl_tax,
         "Price Incuding Tax" : book_price_incl_tax,
         "Availability" : book_available,
-        "Review Rating" : get_book_rating(get_content(url))
+        "Review Rating" : book_info_rating
     }
 
 
-def run():
-    book_info = get_book_info(get_content(url))
-    keys = book_info.keys()
-    with open('result/output_file.csv', 'w', newline='') as csvfile:
-        writer = csv.DictWriter(csvfile, keys, dialect='excel')
-        writer.writeheader()
-        writer.writerows([book_info])
-
-
-if __name__ == "__main__":
-    run()
