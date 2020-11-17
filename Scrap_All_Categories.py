@@ -1,28 +1,20 @@
 from bs4 import BeautifulSoup
 import requests
+import scrap_soup as soup
 import csv
-
-
-def get_website_info(website_url):
-	"""return all html from website chosen"""
-	response = requests.get(website_url)
-	if response.status_code != 200:
-		raise Exception("couldn't pull information!/ URL not valid")
-	return BeautifulSoup(response.content, features='html.parser')
 
 
 
 def get_category_details(website_url):
 	"""returns names and URLs of categories in a dictionnary"""
-	soup_object = get_website_info(website_url)
-	category = soup_object.select(".side_categories li ul li a")
-	dico = {}
+	soup_object = soup.get_soup(website_url)
+	categories = soup_object.select(".side_categories li ul li a")
+	categories_details = {}
 
-	for element in category:
+	for element in categories:
 		title = element.get_text('a').strip()
 		url = "http://" + str(element.get('href'))
-		dico[title] = url
+		categories_details[title] = url
 
-	return dico
+	return categories_details
 
-print(get_category_details("http://books.toscrape.com/index.html"))

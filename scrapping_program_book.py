@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 import csv
+import scrap_category as scrap_cat
 
 
 def get_content(url):
@@ -15,15 +16,15 @@ def get_book_rating(url):
 	"""gets and returns the rating from selected book"""
 	book_info_rating = str((get_content(url)))
 	if "star-rating Four" in book_info_rating:
-		return ("Four Stars")
+		return 4
 	elif "star-rating Three" in book_info_rating:
-		return ("Three Stars")
+		return 3
 	elif "star-rating Two" in book_info_rating:
-		return ("Two Stars")
+		return 2
 	elif "star-rating One" in book_info_rating:
-		return ("One Star")
+		return 1
 	else:
-		return ("No Rating Available")
+		return ("No Rating Found")
 
 def get_book_info(url):
     """
