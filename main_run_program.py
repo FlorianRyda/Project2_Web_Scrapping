@@ -1,17 +1,18 @@
 from bs4 import BeautifulSoup
 import requests
+import urllib3
 import csv
-import Scrapping_Program as scrap_book
-import Scrap_All_Categories as all_c
-import Scrap_Category_Pagination as num_pages
-import Scrap_Category as scrap_cat
+import scrapping_program_book as scrap_book
+import scrap_all_categories as all_c
+import scrap_category_pagination as num_pages
+import scrap_category as scrap_cat
 import scrap_soup as soup
 
 #this module is a work in progress
-url = "http://books.toscrape.com/index.html"
-
 def run():
     """Calls all other functions to return all categories and book information from selected website"""
+    url = "http://books.toscrape.com/"
+
     categories = all_c.get_category_details(url)
 
     with open('result/output_file', 'w', newline ='') as category_csv:
@@ -20,7 +21,7 @@ def run():
 	    	category_pages = num_pages.get_pages_number(category_url)
 
 	    	for i in range(category_pages):
-	    		category_page_url = f"http://books.com/category/mystery/page-{i + 1}.html"
+	    		category_page_url = f"http://books.toscrape.com/category/{category_name}/page-{i + 1}.html"
 	    		books_urls = scrap_cat.get_href_books(category_page_url)
 
 	    		for book_url in books_urls:
