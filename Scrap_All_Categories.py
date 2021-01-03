@@ -13,8 +13,9 @@ def get_category_details(website_url):
 
 	for element in categories:
 		title = element.get_text('a').strip()
-		url = "http://" + str(element.get('href'))
+		url = "http://books.toscrape.com/" + str(element.get('href'))
 		categories_details[title] = url
 
 	return categories_details
+
 
