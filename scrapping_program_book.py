@@ -45,7 +45,8 @@ def get_book_info(url):
         "Image URL" : book_info_img_url,
         "UPC" : book_info_upc,
         "Price Excluding Tax" : book_price_excl_tax,
-        "Price Incuding Tax" : book_price_incl_tax,
+        "Price Including Tax" : book_price_incl_tax,
         "Availability" : book_available,
         "Review Rating" : book_info_rating
         }
+        

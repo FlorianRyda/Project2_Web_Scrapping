@@ -7,3 +7,4 @@ def get_soup(website_url):
 	if response.status_code != 200:
 		raise Exception(f"couldn't pull information for {website_url}!")
 	return BeautifulSoup(response.content, features='html.parser')
+
