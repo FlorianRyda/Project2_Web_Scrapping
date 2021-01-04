@@ -8,33 +8,36 @@ import scrap_category_pagination as num_pages
 import scrap_category as scrap_cat
 import scrap_soup as soup
 import shutil
+import re
 
 def get_and_write_books(csv_writer, page_url):
+    """create csv files with book information"""
     books_urls = scrap_cat.get_href_books(page_url)
-
     csv_writer.writeheader()
+    
     for book_url in books_urls:
         book_info = scrap_book.get_book_info(book_url)
         csv_writer.writerow(book_info)
-
-        book_info_img_url = "https://books.toscrape.com" + book_info['Image URL'].replace("../../","/")
-        print(book_info_img_url)
-        Img_File_Name = book_info_img_url.split("/")[-1]
-        print(Img_File_Name)
         
-        request = requests.get(book_info_img_url, stream = True)
+        book_info_img_url = "https://books.toscrape.com" + book_info['Image URL'].replace("../../","/")
+        book_img_title = re.sub(r"[^a-zA-Z\s]", "", book_info['Title'])
 
+        img_file_name =  book_info['Category'] + '_' + book_info_title_quotes_removed + '_' + book_info_img_url.split('/')[-1]
+        print(Img_File_Name)
+
+        request = requests.get(book_info_img_url, stream = True)
         if request.status_code == 200:
             # Set decode_content value to True, otherwise the downloaded image file's size will be zero.
             request.raw.decode_content = True
             # Open a local file with wb ( write binary ) permission.
-            with open(f'result/{Img_File_Name}',"wb") as Img:
-                shutil.copyfileobj(request.raw, Img)
+            with open(f'result/{img_file_name}',"wb") as img:
+                shutil.copyfileobj(request.raw, img)
             print('Image retrieved successfully')
         else:
             print('Image not retrieved')
 
 def run():
+    """Creates DictWriter object and calls function to create csv files with book information"""
     website_url = "http://books.toscrape.com/"
     categories = all_c.get_category_details(website_url)
 
