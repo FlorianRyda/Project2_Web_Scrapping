@@ -13,7 +13,6 @@ import re
 def get_and_write_books(csv_writer, page_url):
     """create csv files with book information"""
     books_urls = scrap_cat.get_href_books(page_url)
-    csv_writer.writeheader()
     
     for book_url in books_urls:
         book_info = scrap_book.get_book_info(book_url)
@@ -21,9 +20,7 @@ def get_and_write_books(csv_writer, page_url):
         
         book_info_img_url = "https://books.toscrape.com" + book_info['Image URL'].replace("../../","/")
         book_img_title = re.sub(r"[^a-zA-Z\s]", "", book_info['Title'])
-
-        img_file_name =  book_info['Category'] + '_' + book_info_title_quotes_removed + '_' + book_info_img_url.split('/')[-1]
-        print(Img_File_Name)
+        img_file_name =  book_info['Category'] + '_' + book_img_title + '_' + book_info_img_url.split('/')[-1]
 
         request = requests.get(book_info_img_url, stream = True)
         if request.status_code == 200:
@@ -46,8 +43,8 @@ def run():
             fields = ['URL','Title','Category','Description','Image URL','UPC',
             'Price Excluding Tax','Price Including Tax','Availability','Review Rating']
             csv_writer = csv.DictWriter(csv_file, fieldnames=fields, dialect='excel')
+            csv_writer.writeheader()
             get_and_write_books(csv_writer, category_url)
-           
             category_pages = num_pages.get_pages_number(category_url)
             if category_pages > 1:
                 for i in range(category_pages-1):
