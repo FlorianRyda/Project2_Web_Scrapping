@@ -1,8 +1,8 @@
 import requests
 import csv
-import scrapper.all_categories
-import scrapper.pagination
-import scrapper.writer
+from parser.all_categories import get_category_details
+import parser.pagination
+import export.writer
 
 
 def run():

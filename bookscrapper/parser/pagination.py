@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
-import scrapper.requester
+from requester import get_soup
 
 
 def get_pages_number(category_url):
