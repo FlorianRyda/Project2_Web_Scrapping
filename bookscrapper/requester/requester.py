@@ -1,5 +1,5 @@
-from bs4 import BeautifulSoup
 import requests
+from bs4 import BeautifulSoup
 
 
 def get_soup(website_url):
@@ -7,4 +7,4 @@ def get_soup(website_url):
     response = requests.get(website_url)
     if response.status_code != 200:
         raise Exception(f"couldn't pull information for {website_url}!")
-    return BeautifulSoup(response.content, features='html.parser')
+    return BeautifulSoup(response.content, features="html.parser")
