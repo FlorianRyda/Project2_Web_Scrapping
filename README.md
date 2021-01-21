@@ -9,7 +9,8 @@ Ouvrir un terminal (Cygwin par exemple),
 Utiliser la commande cd pour aller dans le dossier cible
 Copier le lien vers le dépôt GitHub du projet : git@github.com:FlorianRyda/Project2_Web_Scrapping.git
 Cloner le dépôt Github en local pour pouvoir exécuter le programme sur ordinateur en tapant la commande suivante puis en la validant dans le terminal : 
-                          git clone git@github.com:FlorianRyda/Project2_Web_Scrapping.git
+
+git clone git@github.com:FlorianRyda/Project2_Web_Scrapping.git
 
 Le programme devrait à présent être cloné dans le dossier cible. 
 Cette étape n’aura pas besoin d’être répétée tant que le dépôt cloné ne sera pas modifié ou supprimé de votre machine. 
@@ -62,5 +63,3 @@ Durant l’exécution, le dossier “result” dans le dossier “bookscrapper�
 Les fichiers image en .jpg seront également importés dans le même document. 
 
 L’exécution du programme prend environ 30 minutes. 
-
-
