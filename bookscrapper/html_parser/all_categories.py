@@ -1,4 +1,6 @@
 from bookscrapper.requester import get_soup
+from bookscrapper.constants import site_url
+
 
 def get_category_details(website_url):
     """returns names and URLs of categories in a dictionnary"""
@@ -7,8 +9,8 @@ def get_category_details(website_url):
     categories_details = {}
 
     for element in categories:
-        title = element.get_text('a').strip()
-        url = "http://books.toscrape.com/" + str(element.get('href'))
+        title = element.get_text("a").strip()
+        url = site_url + str(element.get("href"))
         categories_details[title] = url
 
     return categories_details

@@ -1,5 +1,6 @@
 from bookscrapper.requester import get_soup
 
+
 def get_book_rating(url):
     """gets and returns the rating from selected book"""
     book_info_rating = str((get_soup(url)))
@@ -12,7 +13,7 @@ def get_book_rating(url):
     elif "star-rating One" in book_info_rating:
         return 1
     else:
-        return ("No Rating Found")
+        return "No Rating Found"
 
 
 def get_book_info(url):
@@ -22,15 +23,14 @@ def get_book_info(url):
     """
     parsed_content = get_soup(url)
     book_info_rating = get_book_rating(url)
-    book_info_title = parsed_content.select('h1')[0].text.strip()
-    book_info_category = parsed_content.select('ul li a')[2].text.strip()
-    book_info_description = parsed_content.select('.product_page p')[
-        3].text.strip()
-    book_info_img_url = parsed_content.select('img')[0].get('src')
-    book_info_upc = parsed_content.select('td')[0].text.strip()
-    book_price_excl_tax = parsed_content.select('td')[2].text.strip()
-    book_price_incl_tax = parsed_content.select('td')[3].text.strip()
-    book_available = parsed_content.select('td')[5].text.strip()
+    book_info_title = parsed_content.select("h1")[0].text.strip()
+    book_info_category = parsed_content.select("ul li a")[2].text.strip()
+    book_info_description = parsed_content.select(".product_page p")[3].text.strip()
+    book_info_img_url = parsed_content.select("img")[0].get("src")
+    book_info_upc = parsed_content.select("td")[0].text.strip()
+    book_price_excl_tax = parsed_content.select("td")[2].text.strip()
+    book_price_incl_tax = parsed_content.select("td")[3].text.strip()
+    book_available = parsed_content.select("td")[5].text.strip()
 
     return {
         "URL": url,
@@ -42,8 +42,5 @@ def get_book_info(url):
         "Price Excluding Tax": book_price_excl_tax,
         "Price Including Tax": book_price_incl_tax,
         "Availability": book_available,
-        "Review Rating": book_info_rating
+        "Review Rating": book_info_rating,
     }
-
-
-    
