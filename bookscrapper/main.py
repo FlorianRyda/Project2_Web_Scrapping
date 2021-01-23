@@ -10,7 +10,6 @@ from bookscrapper.html_parser.pagination import get_pages_number
 
 
 
-
 def run():
     """Creates csv and writes files with book information"""
     website_url = SITE_URL

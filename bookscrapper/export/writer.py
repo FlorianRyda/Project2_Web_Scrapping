@@ -35,7 +35,8 @@ def get_and_write_books(csv_writer, page_url):
             # image file's size will be zero.
             request.raw.decode_content = True
             # Open a local file with wb ( write binary ) permission.
+
             with open(f"{EXPORT_DOCUMENT}{img_file_name}", "wb") as img:
                 shutil.copyfileobj(request.raw, img)
         else:
-            print(f"Image file from book {book_img_title} in category {book_info['Category']} not retrieved")
+            print(f"Image file from book {book_img_title} in category {book_info['Category']} could not be retrieved")

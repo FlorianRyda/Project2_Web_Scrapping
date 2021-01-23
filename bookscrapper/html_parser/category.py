@@ -10,7 +10,6 @@ def get_href_books(category_url):
     for book in book_select:
         book_href = book.get("href", None)
         book_href = book_href.replace("../../..", "catalogue")
-
         book_url = SITE_URL + str(book_href)
         list_category_links.append(book_url)
 
