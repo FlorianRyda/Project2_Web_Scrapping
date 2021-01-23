@@ -25,9 +25,7 @@ def get_and_write_books(csv_writer, page_url):
             book_info["Category"]
             + "_"
             + book_img_title
-            + "_"
-            + book_info_img_url.split("/")[-1]
-        )
+            +".jpg")
 
         request = requests.get(book_info_img_url, stream=True)
         if request.status_code == 200:
